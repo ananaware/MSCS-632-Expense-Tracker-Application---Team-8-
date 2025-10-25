@@ -36,3 +36,9 @@ python app.py
 cd cpp
 cl /std:c++17 /EHsc /O2 main.cpp Expense.cpp Store.cpp Summary.cpp /Fe:expense_tracker_cpp.exe
 expense_tracker_cpp.exe
+
+## Test Evidence
+- Python smoke test: `cd python && python test_smoke.py` → prints “✅ OK: smoke test passed”.
+- C++ manual checks: 2(View) → 9(Search) → 8(Edit) → 7(Delete) → 5(Summary) → 6(Overall) → 0(Exit).
+- Cross-language: changes reflected across Python & C++ via shared `expenses.csv`.
+
