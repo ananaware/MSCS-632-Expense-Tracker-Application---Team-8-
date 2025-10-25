@@ -1,0 +1,17 @@
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# C++ build artifacts
+cpp/*.obj
+cpp/*.exe
+cpp/*.pdb
+cpp/*.ilk
+cpp/Debug/
+cpp/Release/
+
+# OS junk
+.DS_Store
+Thumbs.db
