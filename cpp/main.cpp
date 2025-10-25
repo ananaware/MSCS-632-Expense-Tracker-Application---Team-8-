@@ -1,3 +1,11 @@
+// main.cpp — Expense Tracker (C++)
+// Purpose: CLI entry point; provides the menu and orchestrates all actions.
+// Responsibilities:
+//   - Add, view, filter, delete, edit, search, summarize expenses.
+//   - Calls Store and Summary modules.
+// Notes: Mirrors Python CLI for functional parity and demonstrates static typing.
+
+
 #include <iostream>
 #include <iomanip>
 #include "Store.h"

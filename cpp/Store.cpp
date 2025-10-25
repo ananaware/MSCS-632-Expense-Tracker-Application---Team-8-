@@ -1,3 +1,9 @@
+// Store.cpp — Expense Tracker (C++)
+// Purpose: Implements the CSV load/save/append/delete/edit/search logic.
+// Notes: Demonstrates STL (vector, unordered_map), exception handling,
+//        and C++17 RAII for file streams.
+
+
 #include "Store.h"
 #include <fstream>
 #include <sstream>

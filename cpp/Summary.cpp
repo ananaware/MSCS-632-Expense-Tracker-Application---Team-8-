@@ -1,3 +1,8 @@
+// Summary.cpp — Expense Tracker (C++)
+// Purpose: Implements filtering and aggregation logic for expenses.
+// Notes: Demonstrates STL algorithms, unordered_map aggregation, and numeric ops.
+
+
 #include "Summary.h"
 #include "Store.h"
 #include <algorithm>

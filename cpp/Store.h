@@ -1,3 +1,11 @@
+// Store.h — Expense Tracker (C++)
+// Purpose: Declares file I/O and data-management utilities for CSV persistence.
+// Responsibilities:
+//   - Load, save, append expenses to ../expenses.csv.
+//   - Provide validation helpers and new Deliverable 2 ops (delete/edit/search).
+// Notes: Demonstrates STL containers, RAII file handling, and exception safety.
+
+
 #pragma once
 #include "Expense.h"
 #include <string>

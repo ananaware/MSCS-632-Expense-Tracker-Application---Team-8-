@@ -1,3 +1,10 @@
+// Summary.h — Expense Tracker (C++)
+// Purpose: Declares functions for filtering and summarizing expenses.
+// Responsibilities:
+//   - Filter by date range or category.
+//   - Calculate category totals and overall sum.
+
+
 #pragma once
 #include "Expense.h"
 #include <string>
