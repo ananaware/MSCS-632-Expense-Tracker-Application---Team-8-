@@ -1,3 +1,15 @@
+"""
+app.py — CLI for the Expense Tracker (Python)
+
+Responsibilities:
+- Menu/UI only; delegates storage/filtering/validation to store.py
+- Implements: add, view, filter (date/category), summary, overall, delete/edit/search
+
+Language-specific notes:
+- Simple, readable control flow; shows dynamic typing and quick iteration
+"""
+
+
 # Expense Tracker CLI (Python)
 # Deliverable 2: complete core features + language-specific bits
 # Uses dynamic typing (dicts) and datetime parsing where helpful

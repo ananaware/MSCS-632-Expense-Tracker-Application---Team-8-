@@ -1,3 +1,17 @@
+"""
+store.py — Persistence & helpers for the Expense Tracker (Python)
+
+Responsibilities:
+- Load/save CSV (id,date,amount,category,description) shared with C++ (../expenses.csv)
+- Validation helpers: validate_iso (YYYY-MM-DD), parse_amount (non-negative float)
+- Core operations: delete_by_id, edit_by_id, search (category/description)
+
+Language-specific notes:
+- Demonstrates Python's dynamic typing with dict-based records
+- Uses datetime for ISO date validation
+"""
+
+
 from __future__ import annotations
 import csv
 from datetime import datetime
