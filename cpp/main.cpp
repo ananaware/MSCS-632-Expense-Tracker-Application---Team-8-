@@ -2,6 +2,8 @@
 #include <iomanip>
 #include "Store.h"
 #include "Summary.h"
+#include <optional>
+
 
 using namespace std;
 
@@ -22,15 +24,19 @@ static void printExpenses(const std::vector<Expense>& v) {
 int main() {
     try {
         while (true) {
-            cout << "\n==== Expense Tracker (C++) ====\n"
-                 << "1. Add Expense\n"
-                 << "2. View All Expenses\n"
-                 << "3. Filter by Date Range\n"
-                 << "4. Filter by Category\n"
-                 << "5. Summary by Category\n"
-                 << "6. Overall Total\n"
-                 << "7. Exit\n"
-                 << "Choose (1-7): ";
+           cout << "\n==== Expense Tracker (C++) ====\n"
+     << "1. Add Expense\n"
+     << "2. View All Expenses\n"
+     << "3. Filter by Date Range\n"
+     << "4. Filter by Category\n"
+     << "5. Summary by Category\n"
+     << "6. Overall Total\n"
+     << "7. Delete by ID\n"
+     << "8. Edit by ID\n"
+     << "9. Search text\n"
+     << "0. Exit\n"
+     << "Choose (0-9): ";
+
             string choice; getline(cin, choice);
 
             if (choice == "1") {
@@ -73,10 +79,71 @@ int main() {
                 auto items = Store::load();
                 cout << "Overall total: $" << fixed << setprecision(2) << Summary::overall(items) << "\n";
 
-            } else if (choice == "7" || cin.eof()) {
+            } else if (choice == "0" || cin.eof()) {
                 cout << "Goodbye!\n";
                 break;
-            } else {
+            } // 7) Delete by ID
+else if (choice == "7") {
+    auto items = Store::load();
+    cout << "ID to delete: ";
+    string s; getline(cin, s);
+    long id = stol(s);
+
+    auto out = Store::deleteById(items, id);
+    Store::save(out);
+    if (out.size() < items.size()) cout << "Deleted.\n";
+    else cout << "ID not found.\n";
+}
+
+// 8) Edit by ID
+else if (choice == "8") {
+    auto items = Store::load();
+    cout << "ID to edit: ";
+    string s; getline(cin, s);
+    long id = stol(s);
+
+    cout << "Leave blank to keep unchanged.\n";
+
+    cout << "New date (YYYY-MM-DD): ";
+    string nd; getline(cin, nd);
+    const string* pDate = nd.empty() ? nullptr : &nd;
+
+    cout << "New amount: ";
+    string na; getline(cin, na);
+    optional<double> amtOpt;
+    const double* pAmt = nullptr;
+    if (!na.empty()) {
+        double v = Store::parseAmount(na);
+        amtOpt = v;
+        pAmt = &*amtOpt;
+    }
+
+    cout << "New category: ";
+    string nc; getline(cin, nc);
+    const string* pCat = nc.empty() ? nullptr : &nc;
+
+    cout << "New description: ";
+    string nx; getline(cin, nx);
+    const string* pDesc = nx.empty() ? nullptr : &nx;
+
+    try {
+        auto out = Store::editById(items, id, pDate, pAmt, pCat, pDesc);
+        Store::save(out);
+        cout << "Edited (if ID existed).\n";
+    } catch (const exception& ex) {
+        cout << "Edit failed: " << ex.what() << "\n";
+    }
+}
+
+// 9) Search text
+else if (choice == "9") {
+    auto items = Store::load();
+    cout << "Search text (category/description): ";
+    string q; getline(cin, q);
+    auto res = Store::search(items, q);
+    printExpenses(res);
+}
+else {
                 cout << "Invalid choice.\n";
             }
         }

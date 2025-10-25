@@ -159,3 +159,64 @@ namespace Store {
         return t;
     }
 }
+
+// ===================== Deliverable 2: implementations =====================
+
+std::vector<Expense> Store::deleteById(const std::vector<Expense>& items, long id) {
+    std::vector<Expense> out;
+    out.reserve(items.size());
+    for (const auto& e : items) {
+        if (e.id != id) out.push_back(e);
+    }
+    return out;
+}
+
+std::vector<Expense> Store::editById(
+    const std::vector<Expense>& items,
+    long id,
+    const std::string* newDate,
+    const double* newAmount,
+    const std::string* newCategory,
+    const std::string* newDesc
+) {
+    std::vector<Expense> out = items; // copy, then modify in place
+    for (auto& e : out) {
+        if (e.id == id) {
+            if (newDate) {
+                validateDate(*newDate);
+                e.date = *newDate;
+            }
+            if (newAmount) {
+                if (*newAmount < 0.0) throw std::runtime_error("Amount must be >= 0");
+                e.amount = *newAmount;
+            }
+            if (newCategory) {
+                e.category = normalizeCategory(*newCategory);
+            }
+            if (newDesc) {
+                e.description = *newDesc;
+            }
+            break;
+        }
+    }
+    return out;
+}
+
+std::vector<Expense> Store::search(const std::vector<Expense>& items, const std::string& text) {
+    // lowercase query
+    std::string q = text;
+    std::transform(q.begin(), q.end(), q.begin(), [](unsigned char c){ return std::tolower(c); });
+
+    std::vector<Expense> out;
+    out.reserve(items.size());
+    for (const auto& e : items) {
+        std::string cat = e.category;
+        std::string desc = e.description;
+        std::transform(cat.begin(), cat.end(), cat.begin(), [](unsigned char c){ return std::tolower(c); });
+        std::transform(desc.begin(), desc.end(), desc.begin(), [](unsigned char c){ return std::tolower(c); });
+        if (cat.find(q) != std::string::npos || desc.find(q) != std::string::npos) {
+            out.push_back(e);
+        }
+    }
+    return out;
+}

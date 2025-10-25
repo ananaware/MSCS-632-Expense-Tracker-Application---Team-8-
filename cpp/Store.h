@@ -23,4 +23,19 @@ namespace Store {
     void validateDate(const std::string& iso);
     double parseAmount(const std::string& s);
     std::string normalizeCategory(const std::string& s);
+
+    // --- Deliverable 2: New operations ---
+    std::vector<Expense> deleteById(const std::vector<Expense>& items, long id);
+
+    std::vector<Expense> editById(
+        const std::vector<Expense>& items,
+        long id,
+        const std::string* newDate,
+        const double* newAmount,
+        const std::string* newCategory,
+        const std::string* newDesc
+    );
+
+    std::vector<Expense> search(const std::vector<Expense>& items, const std::string& text);
+
 }
