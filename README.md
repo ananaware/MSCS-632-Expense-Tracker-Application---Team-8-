@@ -10,3 +10,9 @@ Two-language CLI app to add/list/filter expenses and compute summaries.
 ## Run
 See `docs/usage-python.md` and `docs/usage-cpp.md`.
 
+## C++ (Windows / MSVC)
+Open “x64 Native Tools Command Prompt for VS 2022”, then:
+cd cpp
+cl /std:c++17 /EHsc /O2 main.cpp Expense.cpp Store.cpp Summary.cpp /Fe:expense_tracker_cpp.exe
+expense_tracker_cpp.exe
+
